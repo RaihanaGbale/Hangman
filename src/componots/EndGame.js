@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class EndGame extends Component {
+
+    restart = () => {
+        this.setState({
+            score: 100,
+            letterStatus: this.generateLetterStatuses()
+        })
+    }
+
     render() {
         let toCheckLettersArr = []
         this.props.solution.split("").map((letter) =>
@@ -11,9 +19,10 @@ class EndGame extends Component {
         return (
             <div >
                 {this.props.score <= 0 ?
-                    <div>Lost, the answer is:{this.props.solution}</div> :
-                    this.props.solution.split("").length === toCheckLettersArr.length ?
+                    <div>You Lost, the word was:{this.props.solution}</div> :
+                    this.props.solution.split("").length == toCheckLettersArr.length ?
                         <div >Congratulations!!! You won</div> : ""}
+                <button onClick={this.restart}>Restart!</button>
             </div>)
     }
 }

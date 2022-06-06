@@ -12,7 +12,7 @@ class Letters extends Component {
                         <Letter selectLetter={this.props.selectLetter}
                             key={letter} availableLetters={letter}
                             class={Object.values(this.props.letterStatus)[i] === false ?
-                                "non-selcted" : "selected"}
+                                "false" : "true"}
                         />)}
                 </span>
             </div>)
