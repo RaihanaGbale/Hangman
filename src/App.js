@@ -5,7 +5,7 @@ import Letter from '../src/componots/Letter'
 import Letters from '../src/componots/Letters';
 import Score from '../src/componots/Score';
 import Solution from '../src/componots/Solution';
-import EndGame from './componots/EndGame';
+import EndGame from '../src/componots/EndGame';
 
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
         word: "LILY",
         hint: "its a flower"
       },
-      isEnded: false
+      hasEnded: false
     }
   }
 
