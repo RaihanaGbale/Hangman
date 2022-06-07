@@ -7,15 +7,15 @@ class Letters extends Component {
         return (
             <div>
                 <div> Available letters are: </div>
-                <span>
-                    {Object.keys(this.props.letterStatus).map((letter, i) =>
+                <div>
+                {Object.keys(this.props.letterStatus).map((letter, i) =>
                         <Letter selectLetter={this.props.selectLetter}
-                            key={letter} availableLetters={letter}
-                            class={Object.values(this.props.letterStatus)[i] === false ?
-                                "false" : "true"}
+                            key={letter} letters={letter}
+                            class={Object.values(this.props.letterStatus)[i] ?"isClicked" : "isNotClicked"}
                         />)}
-                </span>
+                </div>
             </div>)
     }
 }
-export default Letters
+
+export default Letters 

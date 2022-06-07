@@ -24,7 +24,7 @@ class App extends Component {
 
   generateLetterStatuses() {
     let letterStatus = {}
-    for (let i = 65; i < 91; i++)
+    for (let i = "A".charCodeAt(); i <= "Z".charCodeAt(); i++)
       letterStatus[String.fromCharCode(i)] = false
     return letterStatus
   }
@@ -32,22 +32,38 @@ class App extends Component {
   selectLetter = (letter) => {
     let currentLetterStatus = { ...this.state.letterStatus }
     currentLetterStatus[letter] = true
-    this.setState({letterStatus: currentLetterStatus})
+    this.setState({ letterStatus: currentLetterStatus })
     this.updatePlayerScore(letter)
   }
 
   updatePlayerScore = (letter) => {
+    if (this.state.solution.word.includes(letter.toLowerCase()) ||
+      this.state.solution.word.includes(letter.toUpperCase()))
+      this.setState({
+        score: this.state.score + 5 <= 100 ? this.state.score + 5 : this.state.score,
+        lettersStatus: { ...this.state.letterStatus }
+      })
+
+    else {
+      this.setState({
+        score: this.state.score - 20 >= 0 ? this.state.score - 20 : this.state.score,
+        lettersStatus: { ...this.state.letterStatus }
+      })
+    }
+  }
+
+
+  restart = () => {
     this.setState({
-      score: (this.state.solution.word.includes(letter.toLowerCase()) ||this.state.solution.word.includes(letter.toUpperCase()))
-          ? this.state.score + 5 : this.state.score - 20,
-        lettersStatus: {...this.state.letterStatus}
+      score: 100,
+      letterStatus: this.generateLetterStatuses()
     })
   }
-  
 
   render() {
     return (
-      <div>
+      <div style={{ height: "100vh", backgroundImage: `url("https://cdn4.vectorstock.com/i/1000x1000/64/53/landscape-at-morning-for-game-background-vector-14966453.jpg")` }}>
+        <h1 id="title">Hangman Game</h1>
         <Score score={this.state.score} />
         <Solution letterStatus={this.state.letterStatus}
           solution={this.state.solution} />
@@ -58,6 +74,7 @@ class App extends Component {
           solution={this.state.solution.word}
           score={this.state.score}
         />
+        <button onClick={this.restart}>Restart!</button>
       </div>
     )
   }
